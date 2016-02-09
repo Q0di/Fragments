@@ -1,5 +1,6 @@
 package com.coda.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ public class TopSectionFragment extends Fragment {
 
     TopSectionListener activityCommander;
 
-    public interface TopSectionListener{
+    public interface TopSectionListener {
 
         public void createMeme(String Top, String Bottom);
 
@@ -53,4 +54,17 @@ public class TopSectionFragment extends Fragment {
         activityCommander.createMeme(topET.getText().toString(), bottomET.getText().toString());
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            activityCommander = (TopSectionListener) activity;
+
+        }catch(ClassCastException e){
+            throw new ClassCastException(activity.toString());
+        }
+
+
+}
 }
